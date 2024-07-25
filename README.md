@@ -106,7 +106,7 @@ C:\MyCode\quickjs_cmake\build>mingw32-make
 ```
 
 Demo
-![demo.png](demo.png)
+![demo.png](./demo.png)
 
 # Author
 BBDXF @ 2024-07
