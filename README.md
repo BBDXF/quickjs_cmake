@@ -1,7 +1,7 @@
 # quickjs_cmake
 The cmake build system for [quickjs](https://github.com/bellard/quickjs), and a demo to explain how to use it. include js call C interface and class.
 
-Especially, it support build quickjs on windows platform.
+Especially, it support build quickjs on windows platform(using mingw64).
 
 It support these features:
 - [X] support quickjs shared library
@@ -13,19 +13,22 @@ It support these features:
 - [X] cmake auto setting quickjs VERSION to code
 
 # demo features
-- [ ] Run js code in C
-- [ ] Run js code to use std, os module
-- [ ] Call js function/code from C
-- [ ] Extend js function/class using C
+In `demo.c` file:
+
+- [X] Run js code in C
+- [X] Run js code to use std, os module
+- [X] Call js function/code from C
+- [X] Extend js function/class using C
 - [ ] js http fetch impletation
 - [ ] js UI impletation
 
+
 # Platform Support
 - [X] Windows + Mingw-w64, test passed
-- [ ] Linux + gcc, not tested, should pass
-- [ ] Android + gcc, not tested, should pass
+- [ ] Linux + gcc, not tested, should passed
+- [ ] Android + gcc, not tested, should passed
 
-** Why not support MSVC/Clang? **
+**Why not support MSVC/Clang?**  
 > Because quickjs use a lot of gcc features, headers and pthread library.  
 > If we change it, it's a big change to source code, and can't trace the latest version.
 > The original code is ok for mingw in Win32. 
@@ -33,9 +36,17 @@ It support these features:
 
 # How to use with latest quickjs?
 
+For windows:
+1. Prepare `msys2` env, install `pacman -S base-devel mingw-w64-ucrt-x86_64-toolchain`
+2. Add `C:/msys64/ucrt64/bin` to system PATH.
+
+Other platforms is similar.
+
 ```bash
 cd <dir>
-git submodule update
+
+# get latest quickjs code
+git submodule update --init
 
 # custom build dir and build with release version
 mkdir build
@@ -51,7 +62,7 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 make 
 ```
 
-logs
+Windows logs:  
 ```bash
 C:\MyCode\quickjs_cmake\build>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
 -- The C compiler identification is GNU 14.1.0
@@ -105,7 +116,7 @@ C:\MyCode\quickjs_cmake\build>mingw32-make
 
 ```
 
-Demo
+Demo  
 ![demo.png](./demo.png)
 
 # Author

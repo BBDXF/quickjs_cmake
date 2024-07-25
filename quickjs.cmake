@@ -48,6 +48,7 @@ add_library(quickjs SHARED ${QJS_FILES} )
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include")
 file(COPY "./quickjs/quickjs-libc.h" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/include/") 
 file(COPY "./quickjs/quickjs.h" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/include/") 
+file(COPY "./quickjs/cutils.h" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/include/") 
 
 ##### qjsc
 message(STATUS ">>> Begain qjsc build >>>")
