@@ -23,6 +23,7 @@ In `demo.c` file:
 - [ ] js UI impletation
 
 
+
 # Platform Support
 - [X] Windows + Mingw-w64, test passed
 - [ ] Linux + gcc, not tested, should passed
@@ -118,6 +119,25 @@ C:\MyCode\quickjs_cmake\build>mingw32-make
 
 Demo  
 ![demo.png](./demo.png)
+
+# Window Bug Fix
+This patch fix these issues:
+1. `js_module_loader_so` not support WIN32
+2. `std.urlGet()` return value is always null
+
+
+```bash
+cd quickjs_cmake
+cd quickjs
+git apply ../fix_quickjs.patch
+
+# then goto <how to use step> to build project!
+# enjoy it!
+```
+
+# Document
+1. goto website: https://bellard.org/quickjs/quickjs.html
+2. The html file in local project [html](./qjs-doc.html)
 
 # Author
 BBDXF @ 2024-07
