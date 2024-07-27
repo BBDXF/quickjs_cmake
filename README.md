@@ -19,9 +19,17 @@ In `demo.c` file:
 - [X] Run js code to use std, os module
 - [X] Call js function/code from C
 - [X] Extend js function/class using C
-- [ ] js http fetch impletation
+- [X] js http fetch impletation
 - [ ] js UI impletation
 
+## http request
+1. `std.urlGet()` can use curl in system to get http request. but it only supprot get method and no header,body... parameters.
+
+2. so in `./js/` folder, we have a customed module `fetch.js` can use the simaler method with javascript `fetch` function.
+
+also your can define your js module reference `fetch.js` and `test_fetch.js` file.
+
+> It also need the curl library installed in your system.
 
 
 # Platform Support
@@ -138,6 +146,8 @@ git apply ../fix_quickjs.patch
 # Document
 1. goto website: https://bellard.org/quickjs/quickjs.html
 2. The html file in local project [html](./qjs-doc.html)
+3. My Note [Note.md](./Note.md)
+
 
 # Author
 BBDXF @ 2024-07
