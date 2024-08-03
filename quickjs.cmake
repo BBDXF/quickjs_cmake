@@ -78,3 +78,27 @@ add_custom_command(OUTPUT repl.js.c qjscalc.js.c
 
 add_executable (qjs "./quickjs/qjs.c" repl.js.c qjscalc.js.c)
 target_link_libraries(qjs PRIVATE quickjs)
+
+##### quickjs FFI
+message(STATUS ">>> Begain quickjs-ffi build >>>")
+
+set(QJS_FFI_APP
+    "./quickjs-ffi.c"
+)
+message(STATUS "QJS_FFI_APP ${QJS_FFI_APP}")
+
+# libffi
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFI REQUIRED libffi)
+include_directories(${FFI_INCLUDE_DIRS})
+
+add_library(quickjs-ffi SHARED ${QJS_FFI_APP} )
+
+if(WIN32)
+target_link_libraries(quickjs-ffi PRIVATE quickjs ${FFI_LIBRARIES})
+else()
+pkg_check_modules(DL REQUIRED libdl)
+target_link_libraries(quickjs-ffi PRIVATE quickjs ${FFI_LIBRARIES} ${DL_LIBRARIES})
+endif()
+
+

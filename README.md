@@ -20,7 +20,7 @@ In `demo.c` file:
 - [X] Call js function/code from C
 - [X] Extend js function/class using C
 - [X] js http fetch impletation
-- [ ] js UI impletation
+- [X] js FFI impletation
 
 ## http request
 1. `std.urlGet()` can use curl in system to get http request. but it only supprot get method and no header,body... parameters.
@@ -30,6 +30,36 @@ In `demo.c` file:
 also your can define your js module reference `fetch.js` and `test_fetch.js` file.
 
 > It also need the curl library installed in your system.
+
+## js FFI
+using `https://github.com/shajunxing/quickjs-ffi`, it depends on `libffi` library.  
+
+the original version only support lunux/unix system, i changed it to support windows.
+
+how to use it:
+```bash
+# build all firstly
+cd build
+
+# if on windows platform, 
+copy libquickjs-ffi.dll ../js/quickjs-ffi.so
+
+qjs ../js/test_ffi.js
+```
+
+js code:
+```js
+import { CFunction, freeCif } from './quickjs-ffi.js'
+var LIBC_SO = 'msvcrt.dll';
+let printf = new CFunction(LIBC_SO, 'printf', 1, 'int', 'string', 'double', 'double', 'int');
+printf.invoke('test count: %g %g %d\n', 3.141592654, 2.718281829, 299792458);
+freeCif(printf.cifcacheindex);
+printf.free();
+printf = new CFunction(LIBC_SO, 'printf', 1, 'int', 'string', 'string', 'string');
+printf.invoke('test2: %s %s\n', 'hello', 'world');
+freeCif(printf.cifcacheindex);
+printf.free();
+```
 
 
 # Platform Support
@@ -46,8 +76,9 @@ also your can define your js module reference `fetch.js` and `test_fetch.js` fil
 # How to use with latest quickjs?
 
 For windows:
-1. Prepare `msys2` env, install `pacman -S base-devel mingw-w64-ucrt-x86_64-toolchain`
-2. Add `C:/msys64/ucrt64/bin` to system PATH.
+1. Prepare `msys2` env, install `pacman -S base-devel mingw-w64-ucrt-x86_64-toolchain`  
+2. FFI depends on library libffi `pacman -S mingw-w64-ucrt-x86_64-libffi`   
+3. Add `C:/msys64/ucrt64/bin` to system PATH.
 
 Other platforms is similar.
 
